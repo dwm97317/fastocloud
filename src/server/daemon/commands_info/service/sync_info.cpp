@@ -15,21 +15,33 @@
 #include "server/daemon/commands_info/service/sync_info.h"
 
 #define SYNC_INFO_STREAMS_FIELD "streams"
+#if defined(SUBSCRIBERS)
 #define SYNC_INFO_USERS_FIELD "subscribers"
+#endif
 
 namespace fastocloud {
 namespace server {
 namespace service {
 
-SyncInfo::SyncInfo() : base_class(), streams_(), users_() {}
+SyncInfo::SyncInfo()
+    : base_class(),
+      streams_()
+#if defined(SUBSCRIBERS)
+      ,
+      users_()
+#endif
+{
+}
 
 SyncInfo::streams_t SyncInfo::GetStreams() const {
   return streams_;
 }
 
+#if defined(SUBSCRIBERS)
 SyncInfo::users_t SyncInfo::GetUsers() const {
   return users_;
 }
+#endif
 
 common::Error SyncInfo::SerializeFields(json_object* out) const {
   json_object* jstreams = json_object_new_array();
@@ -39,12 +51,14 @@ common::Error SyncInfo::SerializeFields(json_object* out) const {
   }
   json_object_object_add(out, SYNC_INFO_STREAMS_FIELD, jstreams);
 
+#if defined(SUBSCRIBERS)
   json_object* jusers = json_object_new_array();
   for (const std::string& user : users_) {
     json_object* juser = json_object_new_string(user.c_str());
     json_object_array_add(jusers, juser);
   }
   json_object_object_add(out, SYNC_INFO_USERS_FIELD, jusers);
+#endif
   return common::Error();
 }
 
@@ -62,6 +76,7 @@ common::Error SyncInfo::DoDeSerialize(json_object* serialized) {
     inf.streams_ = streams;
   }
 
+#if defined(SUBSCRIBERS)
   json_object* jusers = nullptr;
   json_bool jusers_exists = json_object_object_get_ex(serialized, SYNC_INFO_USERS_FIELD, &jusers);
   if (jusers_exists) {
@@ -73,6 +88,7 @@ common::Error SyncInfo::DoDeSerialize(json_object* serialized) {
     }
     inf.users_ = users;
   }
+#endif
 
   *this = inf;
   return common::Error();

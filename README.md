@@ -19,6 +19,7 @@ About IPTV/Video cloud
 * Public API, client server communication via [JSON RPC](https://www.jsonrpc.org/specification)
 * Protocol gzip compression
 * Deep learning video analysis (Paid, demo by request)
+* Subscribers control
 * [IPTV Admin panel](https://github.com/fastogt/iptv_admin)
 * [Docker Image](https://hub.docker.com/r/fastogt/fastocloud)
 

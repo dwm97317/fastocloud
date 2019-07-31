@@ -8,8 +8,10 @@ SET(STREAMER_SERVICE_VODS_PORT 7000)
 SET(STREAMER_SERVICE_VODS_HOST "localhost:${STREAMER_SERVICE_VODS_PORT}")
 SET(STREAMER_SERVICE_CODS_PORT 6000)
 SET(STREAMER_SERVICE_CODS_HOST "localhost:${STREAMER_SERVICE_CODS_PORT}")
-SET(STREAMER_SERVICE_SUBSCRIBERS_PORT 5000)
-SET(STREAMER_SERVICE_SUBSCRIBERS_HOST "localhost:${STREAMER_SERVICE_SUBSCRIBERS_PORT}")
+IF(SUBSCRIBERS)
+  SET(STREAMER_SERVICE_SUBSCRIBERS_PORT 5000)
+  SET(STREAMER_SERVICE_SUBSCRIBERS_HOST "localhost:${STREAMER_SERVICE_SUBSCRIBERS_PORT}")
+ENDIF(SUBSCRIBERS)
 SET(STREAMER_SERVICE_BANDWIDTH_PORT 4000)
 SET(STREAMER_SERVICE_BANDWIDTH_HOST "localhost:${STREAMER_SERVICE_BANDWIDTH_PORT}")
 SET(STREAMER_SERVICE_TTL_FILES 3600)
@@ -63,25 +65,31 @@ SET(SERVER_VODS_SOURCES
   ${CMAKE_SOURCE_DIR}/src/server/vods/server.cpp
 )
 
-SET(SERVER_SUBSCRIBERS_HEADERS
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/handler.h
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/client.h
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/server.h
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/server_auth_info.h
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/commands_info/user_info.h
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/isubscribe_finder.h
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/rpc/user_rpc_info.h
-)
+IF(SUBSCRIBERS)
+  SET(SERVER_SUBSCRIBERS_HEADERS
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/handler.h
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/client.h
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/server.h
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/server_auth_info.h
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/commands_info/user_info.h
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/isubscribe_finder.h
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/rpc/user_rpc_info.h
 
-SET(SERVER_SUBSCRIBERS_SOURCES
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/handler.cpp
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/client.cpp
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/server.cpp
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/server_auth_info.cpp
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/commands_info/user_info.cpp
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/isubscribe_finder.cpp
-  ${CMAKE_SOURCE_DIR}/src/server/subscribers/rpc/user_rpc_info.cpp
-)
+    ${CMAKE_SOURCE_DIR}/src/server/sync_finder.h
+  )
+
+  SET(SERVER_SUBSCRIBERS_SOURCES
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/handler.cpp
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/client.cpp
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/server.cpp
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/server_auth_info.cpp
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/commands_info/user_info.cpp
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/isubscribe_finder.cpp
+    ${CMAKE_SOURCE_DIR}/src/server/subscribers/rpc/user_rpc_info.cpp
+
+    ${CMAKE_SOURCE_DIR}/src/server/sync_finder.cpp
+  )
+ENDIF(SUBSCRIBERS)
 
 SET(SERVER_DAEMON_HEADERS
   ${CMAKE_SOURCE_DIR}/src/server/daemon/client.h
@@ -133,7 +141,6 @@ SET(SERVER_HEADERS
   ${CMAKE_SOURCE_DIR}/src/server/base/iserver_handler.h
   ${CMAKE_SOURCE_DIR}/src/server/base/ihttp_requests_observer.h
 
-  ${CMAKE_SOURCE_DIR}/src/server/sync_finder.h
   ${CMAKE_SOURCE_DIR}/src/server/child.h
   ${CMAKE_SOURCE_DIR}/src/server/child_stream.h
   ${CMAKE_SOURCE_DIR}/src/server/process_slave_wrapper.h
@@ -151,7 +158,6 @@ SET(SERVER_SOURCES
   ${CMAKE_SOURCE_DIR}/src/server/base/iserver_handler.cpp
   ${CMAKE_SOURCE_DIR}/src/server/base/ihttp_requests_observer.cpp
 
-  ${CMAKE_SOURCE_DIR}/src/server/sync_finder.cpp
   ${CMAKE_SOURCE_DIR}/src/server/child.cpp
   ${CMAKE_SOURCE_DIR}/src/server/child_stream.cpp
   ${CMAKE_SOURCE_DIR}/src/server/process_slave_wrapper.cpp
@@ -271,11 +277,16 @@ SET(PRIVATE_COMPILE_DEFINITIONS_SLAVE
   -DHTTP_PORT=${STREAMER_SERVICE_HTTP_PORT}
   -DVODS_PORT=${STREAMER_SERVICE_VODS_PORT}
   -DCODS_PORT=${STREAMER_SERVICE_CODS_PORT}
-  -DSUBSCRIPERS_PORT=${STREAMER_SERVICE_SUBSCRIBERS_PORT}
   -DBANDWIDTH_PORT=${STREAMER_SERVICE_BANDWIDTH_PORT}
   -DTTL_FILES=${STREAMER_SERVICE_TTL_FILES}
   -DSTREAMER_SERVICE_STREAMLINK_PATH="${STREAMER_SERVICE_STREAMLINK_PATH}"
 )
+
+IF(SUBSCRIBERS)
+  SET(PRIVATE_COMPILE_DEFINITIONS_SLAVE ${PRIVATE_COMPILE_DEFINITIONS_SLAVE}
+    -DSUBSCRIPERS_PORT=${STREAMER_SERVICE_SUBSCRIBERS_PORT}
+  )
+ENDIF(SUBSCRIBERS)
 
 SET(EXE_DAEMON_SOURCES ${CMAKE_SOURCE_DIR}/src/server/daemon_slave.cpp)
 

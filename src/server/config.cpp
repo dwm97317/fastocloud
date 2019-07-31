@@ -145,15 +145,17 @@ common::ErrnoError load_config_from_file(const std::string& config_absolute_path
   }
   lconfig.cods_host = cods_host;
 
+#if defined(SUBSCRIBERS)
   common::net::HostAndPort subscribers_host;
   if (!utils::ArgsGetValue(slave_config_args, SERVICE_SUBSCRIBERS_HOST_FIELD, &subscribers_host)) {
     subscribers_host = common::net::HostAndPort::CreateLocalHost(SUBSCRIPERS_PORT);
   }
   lconfig.subscribers_host = subscribers_host;
+#endif
 
   common::net::HostAndPort bandwidth_host;
   if (!utils::ArgsGetValue(slave_config_args, SERVICE_BANDWIDTH_HOST_FIELD, &bandwidth_host)) {
-    subscribers_host = common::net::HostAndPort::CreateLocalHost(BANDWIDTH_PORT);
+    bandwidth_host = common::net::HostAndPort::CreateLocalHost(BANDWIDTH_PORT);
   }
   lconfig.bandwidth_host = bandwidth_host;
 
