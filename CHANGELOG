@@ -1,0 +1,14 @@
+1.4.1 / July 31, 2019
+[Alexandr Topilski]
+- Rtsp source element
+- StreamLink support
+- IP Camera
+- Deep learning initialization
+- Object detection
+- Channels on demand
+- Device count check
+- Subscribers
+- User agent
+- Data statistics in bytes, time in seconds
+- Stabilization
+- Avformat streams
