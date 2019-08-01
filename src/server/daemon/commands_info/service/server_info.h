@@ -100,7 +100,6 @@ class FullServiceInfo : public ServerInfo {
   explicit FullServiceInfo(const common::net::HostAndPort& http_host,
                            const common::net::HostAndPort& vods_host,
                            const common::net::HostAndPort& cods_host,
-                           const common::net::HostAndPort& bandwidth_host,
                            const base_class& base);
 
   common::net::HostAndPort GetHttpHost() const;
@@ -109,8 +108,10 @@ class FullServiceInfo : public ServerInfo {
 #if defined(SUBSCRIBERS)
   common::net::HostAndPort GetSubscribersHost() const;
   void SetSubscribersHost(const common::net::HostAndPort& host);
-#endif
+
   common::net::HostAndPort GetBandwidthHost() const;
+  void SetBandwidthHost(const common::net::HostAndPort& host);
+#endif
   std::string GetProjectVersion() const;
 
  protected:

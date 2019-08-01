@@ -1565,10 +1565,10 @@ std::string ProcessSlaveWrapper::MakeServiceStats(bool full_stat) const {
 
   std::string node_stats;
   if (full_stat) {
-    service::FullServiceInfo fstat(config_.http_host, config_.vods_host, config_.cods_host, config_.bandwidth_host,
-                                   stat);
+    service::FullServiceInfo fstat(config_.http_host, config_.vods_host, config_.cods_host, stat);
 #if defined(SUBSCRIBERS)
     fstat.SetSubscribersHost(config_.subscribers_host);
+    fstat.SetBandwidthHost(config_.bandwidth_host);
 #endif
     common::Error err_ser = fstat.SerializeToString(&node_stats);
     if (err_ser) {
