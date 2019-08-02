@@ -15,7 +15,7 @@
 #pragma once
 
 #include "stream/elements/element.h"    // for SupportedElements::ELEMENT_FAKE_SINK
-#include "stream/elements/sink/sink.h"  // for ElementSync
+#include "stream/elements/sink/sink.h"  // for ElementBaseSink
 
 // for element_id_
 
@@ -24,9 +24,9 @@ namespace stream {
 namespace elements {
 namespace sink {
 
-class ElementFakeSink : public ElementSync<ELEMENT_FAKE_SINK> {
+class ElementFakeSink : public ElementBaseSink<ELEMENT_FAKE_SINK> {
  public:
-  typedef ElementSync<ELEMENT_FAKE_SINK> base_class;
+  typedef ElementBaseSink<ELEMENT_FAKE_SINK> base_class;
   using base_class::base_class;
 };
 

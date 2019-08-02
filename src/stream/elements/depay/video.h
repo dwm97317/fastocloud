@@ -20,7 +20,7 @@
 
 // for element_id_t, VIDEO_PAY_NAME_1U
 
-#include "stream/elements/depay/pay.h"  // for ElementRtpPay
+#include "stream/elements/depay/depay.h"  // for ElementRtpPay
 #include "stream/elements/element.h"    // for Element (ptr only), SupportedElements:...
 
 #include "stream/stypes.h"
@@ -53,9 +53,9 @@ T* make_video_depay(element_id_t pay_id) {
   return make_element<T>(common::MemSPrintf(VIDEO_DEPAY_NAME_1U, pay_id));
 }
 
-ElementRtpMPEG2DePay* make_mpeg2_depay(guint pt, element_id_t pay_id);
-ElementRtpH264DePay* make_h264_depay(guint pt, element_id_t pay_id);
-ElementRtpH265DePay* make_h265_depay(guint pt, element_id_t pay_id);
+ElementRtpMPEG2DePay* make_mpeg2_depay(element_id_t pay_id);
+ElementRtpH264DePay* make_h264_depay(element_id_t pay_id);
+ElementRtpH265DePay* make_h265_depay(element_id_t pay_id);
 
 Element* make_video_depay(const std::string& pay, const std::string& name);
 

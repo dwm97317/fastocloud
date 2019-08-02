@@ -21,8 +21,8 @@
 #include "base/constants.h"
 #include "base/gst_constants.h"
 
-#include "stream/elements/parser/audio_parsers.h"
-#include "stream/elements/parser/video_parsers.h"
+#include "stream/elements/parser/audio.h"
+#include "stream/elements/parser/video.h"
 #include "stream/gstreamer_utils.h"
 #include "stream/pad/pad.h"
 #include "stream/streams/builders/encoding/encoding_stream_builder.h"

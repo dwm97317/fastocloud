@@ -12,37 +12,12 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stream/elements/pay/audio_pay.h"
+#include "stream/elements/depay/depay.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
-namespace pay {
-
-ElementRtpAACPay* make_aac_pay(guint pt, element_id_t pay_id) {
-  ElementRtpAACPay* aac_pay = make_audio_pay<ElementRtpAACPay>(pay_id);
-  aac_pay->SetPt(pt);
-  return aac_pay;
-}
-
-ElementRtpAC3Pay* make_ac3_pay(guint pt, element_id_t pay_id) {
-  ElementRtpAC3Pay* aac_pay = make_audio_pay<ElementRtpAC3Pay>(pay_id);
-  aac_pay->SetPt(pt);
-  return aac_pay;
-}
-
-Element* make_audio_pay(const std::string& pay, const std::string& name) {
-  if (pay == ElementRtpAACPay::GetPluginName()) {
-    return new ElementRtpAACPay(name);
-  } else if (pay == ElementRtpAC3Pay::GetPluginName()) {
-    return new ElementRtpAC3Pay(name);
-  }
-
-  NOTREACHED();
-  return nullptr;
-}
-
-}  // namespace pay
+namespace depay {}  // namespace depay
 }  // namespace elements
 }  // namespace stream
 }  // namespace fastocloud

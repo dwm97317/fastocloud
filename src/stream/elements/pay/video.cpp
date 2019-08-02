@@ -12,45 +12,45 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stream/elements/depay/video_pay.h"
+#include "stream/elements/pay/video.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
-namespace depay {
+namespace pay {
 
-ElementRtpMPEG2DePay* make_mpeg2_depay(guint pt, element_id_t pay_id) {
-  ElementRtpMPEG2DePay* h264_pay = make_video_depay<ElementRtpMPEG2DePay>(pay_id);
+ElementRtpMPEG2Pay* make_mpeg2_pay(guint pt, element_id_t pay_id) {
+  ElementRtpMPEG2Pay* h264_pay = make_video_pay<ElementRtpMPEG2Pay>(pay_id);
   h264_pay->SetPt(pt);
   return h264_pay;
 }
 
-ElementRtpH264DePay* make_h264_depay(guint pt, element_id_t pay_id) {
-  ElementRtpH264DePay* h264_pay = make_video_depay<ElementRtpH264DePay>(pay_id);
+ElementRtpH264Pay* make_h264_pay(guint pt, element_id_t pay_id) {
+  ElementRtpH264Pay* h264_pay = make_video_pay<ElementRtpH264Pay>(pay_id);
   h264_pay->SetPt(pt);
   return h264_pay;
 }
 
-ElementRtpH265DePay* make_h265_depay(guint pt, element_id_t pay_id) {
-  ElementRtpH265DePay* h265_pay = make_video_depay<ElementRtpH265DePay>(pay_id);
+ElementRtpH265Pay* make_h265_pay(guint pt, element_id_t pay_id) {
+  ElementRtpH265Pay* h265_pay = make_video_pay<ElementRtpH265Pay>(pay_id);
   h265_pay->SetPt(pt);
   return h265_pay;
 }
 
-Element* make_video_depay(const std::string& pay, const std::string& name) {
-  if (pay == ElementRtpH264DePay::GetPluginName()) {
-    return new ElementRtpH264DePay(name);
-  } else if (pay == ElementRtpH265DePay::GetPluginName()) {
-    return new ElementRtpH265DePay(name);
-  } else if (pay == ElementRtpMPEG2DePay::GetPluginName()) {
-    return new ElementRtpMPEG2DePay(name);
+Element* make_video_pay(const std::string& pay, const std::string& name) {
+  if (pay == ElementRtpH264Pay::GetPluginName()) {
+    return new ElementRtpH264Pay(name);
+  } else if (pay == ElementRtpH265Pay::GetPluginName()) {
+    return new ElementRtpH265Pay(name);
+  } else if (pay == ElementRtpMPEG2Pay::GetPluginName()) {
+    return new ElementRtpMPEG2Pay(name);
   }
 
   NOTREACHED();
   return nullptr;
 }
 
-}  // namespace depay
+}  // namespace pay
 }  // namespace elements
 }  // namespace stream
 }  // namespace fastocloud

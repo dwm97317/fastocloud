@@ -23,9 +23,9 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementAlsaSrc : public ElementEx<ELEMENT_ALSA_SRC> {
+class ElementAlsaSrc : public ElementPushSrc<ELEMENT_ALSA_SRC> {
  public:
-  typedef ElementEx<ELEMENT_ALSA_SRC> base_class;
+  typedef ElementPushSrc<ELEMENT_ALSA_SRC> base_class;
   using base_class::base_class;
 
   void SetDevice(const std::string& device = "default");  // Default value: "default"

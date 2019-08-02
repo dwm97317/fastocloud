@@ -27,13 +27,27 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-typedef ElementEx<ELEMENT_VIDEO_TEST_SRC> ElementVideoTestSrc;
-typedef ElementEx<ELEMENT_AUDIO_TEST_SRC> ElementAudioTestSrc;
-
 template <SupportedElements el>
-class ElementLocation : public ElementEx<el> {
+class ElementBaseSrc : public ElementEx<el> {
  public:
   typedef ElementEx<el> base_class;
+  using base_class::base_class;
+};
+
+template <SupportedElements el>
+class ElementPushSrc : public ElementBaseSrc<el> {
+ public:
+  typedef ElementBaseSrc<el> base_class;
+  using base_class::base_class;
+};
+
+typedef ElementPushSrc<ELEMENT_VIDEO_TEST_SRC> ElementVideoTestSrc;
+typedef ElementPushSrc<ELEMENT_AUDIO_TEST_SRC> ElementAudioTestSrc;
+
+template <SupportedElements el>
+class ElementLocation : public ElementPushSrc<el> {
+ public:
+  typedef ElementPushSrc<el> base_class;
   using base_class::base_class;
 
   void SetLocation(const std::string& location) { base_class::SetProperty("location", location); }

@@ -25,9 +25,9 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementUDPSrc : public ElementEx<ELEMENT_UDP_SRC> {
+class ElementUDPSrc : public ElementPushSrc<ELEMENT_UDP_SRC> {
  public:
-  typedef ElementEx<ELEMENT_UDP_SRC> base_class;
+  typedef ElementPushSrc<ELEMENT_UDP_SRC> base_class;
   using base_class::base_class;
 
   void SetAddress(const std::string& host);

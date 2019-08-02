@@ -27,8 +27,8 @@
 #include "stream/streams/configs/audio_video_config.h"
 
 #include "stream/elements/muxer/muxer.h"
-#include "stream/elements/pay/audio_pay.h"
-#include "stream/elements/pay/video_pay.h"
+#include "stream/elements/pay/audio.h"
+#include "stream/elements/pay/video.h"
 
 namespace fastocloud {
 namespace stream {

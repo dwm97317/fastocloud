@@ -31,8 +31,8 @@
 #endif
 #include "stream/elements/encoders/audio_encoders.h"
 #include "stream/elements/encoders/video_encoders.h"
-#include "stream/elements/parser/audio_parsers.h"
-#include "stream/elements/parser/video_parsers.h"
+#include "stream/elements/parser/audio.h"
+#include "stream/elements/parser/video.h"
 #include "stream/elements/sink/screen.h"
 #include "stream/elements/video/video.h"
 

@@ -234,34 +234,34 @@ SET(ELEMENTS_ENCODERS_SOURCES
 )
 
 SET(ELEMENTS_PARSER_HEADERS
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/video_parsers.h
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/audio_parsers.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/video.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/audio.h
 )
 SET(ELEMENTS_PARSER_SOURCES
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/video_parsers.cpp
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/audio_parsers.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/video.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/audio.cpp
 )
 
 SET(ELEMENTS_PAY_HEADERS
   ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/pay.h
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/video_pay.h
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/audio_pay.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/video.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/audio.h
 )
 SET(ELEMENTS_PAY_SOURCES
   ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/pay.cpp
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/video_pay.cpp
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/audio_pay.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/video.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/audio.cpp
 )
 
 SET(ELEMENTS_DEPAY_HEADERS
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/pay.h
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/video_pay.h
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/audio_pay.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/depay.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/video.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/audio.h
 )
 SET(ELEMENTS_DEPAY_SOURCES
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/pay.cpp
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/video_pay.cpp
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/audio_pay.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/depay.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/video.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/audio.cpp
 )
 
 IF(MACHINE_LEARNING AND FASTOML_FOUND)

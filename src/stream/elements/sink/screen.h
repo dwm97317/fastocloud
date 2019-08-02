@@ -17,28 +17,28 @@
 // for element_id_t, device_output_t, deckl...
 
 #include "stream/elements/element.h"    // for Element (ptr only), SupportedElement...
-#include "stream/elements/sink/sink.h"  // for ElementSync
+#include "stream/elements/sink/sink.h"  // for ElementBaseSink
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace sink {
 
-typedef ElementSync<ELEMENT_VIDEO_SCREEN_SINK> ElementVideoScreenSink;
-typedef ElementSync<ELEMENT_AUDIO_SCREEN_SINK> ElementAudioScreenSink;
+typedef ElementBaseSink<ELEMENT_VIDEO_SCREEN_SINK> ElementVideoScreenSink;
+typedef ElementBaseSink<ELEMENT_AUDIO_SCREEN_SINK> ElementAudioScreenSink;
 
 ElementVideoScreenSink* make_video_screen_sink(element_id_t sink_id);
 ElementAudioScreenSink* make_audio_screen_sink(element_id_t sink_id);
 
-class ElementVideoDeckSink : public ElementSync<ELEMENT_VIDEO_DECK_SINK> {
+class ElementVideoDeckSink : public ElementBaseSink<ELEMENT_VIDEO_DECK_SINK> {
  public:
-  typedef ElementSync<ELEMENT_VIDEO_DECK_SINK> base_class;
+  typedef ElementBaseSink<ELEMENT_VIDEO_DECK_SINK> base_class;
   using base_class::base_class;
 
   void SetMode(decklink_video_mode_t mode = 1);  // 0 - 30 Default: 1, "ntsc"
 };
 
-typedef ElementSync<ELEMENT_AUDIO_DECK_SINK> ElementAudioDeckSink;
+typedef ElementBaseSink<ELEMENT_AUDIO_DECK_SINK> ElementAudioDeckSink;
 
 ElementVideoDeckSink* make_video_deck_sink(element_id_t sink_id);
 ElementAudioDeckSink* make_audio_deck_sink(element_id_t sink_id);

@@ -23,7 +23,7 @@
 
 #include "utils/utils.h"
 
-#include "stream/elements/parser/video_parsers.h"
+#include "stream/elements/parser/video.h"
 #include "stream/gstreamer_utils.h"  // for pad_get_type
 #include "stream/pad/pad.h"          // for Pad
 #include "stream/streams/builders/relay/relay_stream_builder.h"

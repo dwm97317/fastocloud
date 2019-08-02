@@ -64,7 +64,7 @@ class ElementSplitMuxSink : public ElementEx<ELEMENT_SPLIT_MUX_SINK> {
 };
 
 template <SupportedElements el>
-class ElementSync : public ElementEx<el> {
+class ElementBaseSink : public ElementEx<el> {
  public:
   typedef ElementEx<el> base_class;
   using base_class::base_class;

@@ -23,10 +23,12 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementFileSrc : public ElementLocation<ELEMENT_FILE_SRC> {
+class ElementFileSrc : public ElementBaseSrc<ELEMENT_FILE_SRC> {
  public:
-  typedef ElementLocation<ELEMENT_FILE_SRC> base_class;
+  typedef ElementBaseSrc<ELEMENT_FILE_SRC> base_class;
   using base_class::base_class;
+
+  void SetLocation(const std::string& location);
 };
 
 ElementFileSrc* make_file_src(const std::string& location, element_id_t input_id);

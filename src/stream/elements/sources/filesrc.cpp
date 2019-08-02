@@ -19,6 +19,10 @@ namespace stream {
 namespace elements {
 namespace sources {
 
+void ElementFileSrc::SetLocation(const std::string& location) {
+  SetProperty("location", location);
+}
+
 ElementFileSrc* make_file_src(const std::string& location, element_id_t input_id) {
   ElementFileSrc* file_src = make_sources<ElementFileSrc>(input_id);
   file_src->SetLocation(location);

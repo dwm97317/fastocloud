@@ -23,9 +23,9 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementAppSrc : public ElementEx<ELEMENT_APP_SRC> {
+class ElementAppSrc : public ElementBaseSrc<ELEMENT_APP_SRC> {
  public:
-  typedef ElementEx<ELEMENT_APP_SRC> base_class;
+  typedef ElementBaseSrc<ELEMENT_APP_SRC> base_class;
   typedef void (*need_data_callback_t)(GstElement* pipeline, guint size, gpointer user_data);
   using base_class::base_class;
 

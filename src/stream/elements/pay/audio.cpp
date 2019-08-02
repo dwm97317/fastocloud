@@ -12,38 +12,30 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stream/elements/pay/video_pay.h"
+#include "stream/elements/pay/audio.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace pay {
 
-ElementRtpMPEG2Pay* make_mpeg2_pay(guint pt, element_id_t pay_id) {
-  ElementRtpMPEG2Pay* h264_pay = make_video_pay<ElementRtpMPEG2Pay>(pay_id);
-  h264_pay->SetPt(pt);
-  return h264_pay;
+ElementRtpAACPay* make_aac_pay(guint pt, element_id_t pay_id) {
+  ElementRtpAACPay* aac_pay = make_audio_pay<ElementRtpAACPay>(pay_id);
+  aac_pay->SetPt(pt);
+  return aac_pay;
 }
 
-ElementRtpH264Pay* make_h264_pay(guint pt, element_id_t pay_id) {
-  ElementRtpH264Pay* h264_pay = make_video_pay<ElementRtpH264Pay>(pay_id);
-  h264_pay->SetPt(pt);
-  return h264_pay;
+ElementRtpAC3Pay* make_ac3_pay(guint pt, element_id_t pay_id) {
+  ElementRtpAC3Pay* aac_pay = make_audio_pay<ElementRtpAC3Pay>(pay_id);
+  aac_pay->SetPt(pt);
+  return aac_pay;
 }
 
-ElementRtpH265Pay* make_h265_pay(guint pt, element_id_t pay_id) {
-  ElementRtpH265Pay* h265_pay = make_video_pay<ElementRtpH265Pay>(pay_id);
-  h265_pay->SetPt(pt);
-  return h265_pay;
-}
-
-Element* make_video_pay(const std::string& pay, const std::string& name) {
-  if (pay == ElementRtpH264Pay::GetPluginName()) {
-    return new ElementRtpH264Pay(name);
-  } else if (pay == ElementRtpH265Pay::GetPluginName()) {
-    return new ElementRtpH265Pay(name);
-  } else if (pay == ElementRtpMPEG2Pay::GetPluginName()) {
-    return new ElementRtpMPEG2Pay(name);
+Element* make_audio_pay(const std::string& pay, const std::string& name) {
+  if (pay == ElementRtpAACPay::GetPluginName()) {
+    return new ElementRtpAACPay(name);
+  } else if (pay == ElementRtpAC3Pay::GetPluginName()) {
+    return new ElementRtpAC3Pay(name);
   }
 
   NOTREACHED();

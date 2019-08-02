@@ -25,9 +25,9 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementTCPSrc : public ElementEx<ELEMENT_TCP_SERVER_SRC> {
+class ElementTCPSrc : public ElementPushSrc<ELEMENT_TCP_SERVER_SRC> {
  public:
-  typedef ElementEx<ELEMENT_TCP_SERVER_SRC> base_class;
+  typedef ElementPushSrc<ELEMENT_TCP_SERVER_SRC> base_class;
   using base_class::base_class;
 
   void SetHost(const std::string& host = "localhost");  // String. Default: "localhost"

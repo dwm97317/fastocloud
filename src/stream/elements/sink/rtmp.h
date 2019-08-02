@@ -19,16 +19,16 @@
 #include <string>
 
 #include "stream/elements/element.h"    // for SupportedElements::ELEMENT_RTMP_SINK
-#include "stream/elements/sink/sink.h"  // for ElementSync
+#include "stream/elements/sink/sink.h"  // for ElementBaseSink
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace sink {
 
-class ElementRtmpSink : public ElementSync<ELEMENT_RTMP_SINK> {
+class ElementRtmpSink : public ElementBaseSink<ELEMENT_RTMP_SINK> {
  public:
-  typedef ElementSync<ELEMENT_RTMP_SINK> base_class;
+  typedef ElementBaseSink<ELEMENT_RTMP_SINK> base_class;
   using base_class::base_class;
 
   void SetLocation(const std::string& location);

@@ -12,30 +12,35 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stream/elements/depay/audio_pay.h"
+#include "stream/elements/depay/video.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace depay {
 
-ElementRtpAACDePay* make_aac_depay(guint pt, element_id_t pay_id) {
-  ElementRtpAACDePay* aac_pay = make_audio_depay<ElementRtpAACDePay>(pay_id);
-  aac_pay->SetPt(pt);
-  return aac_pay;
+ElementRtpMPEG2DePay* make_mpeg2_depay(element_id_t pay_id) {
+  ElementRtpMPEG2DePay* h264_pay = make_video_depay<ElementRtpMPEG2DePay>(pay_id);
+  return h264_pay;
 }
 
-ElementRtpAC3DePay* make_ac3_depay(guint pt, element_id_t pay_id) {
-  ElementRtpAC3DePay* aac_pay = make_audio_depay<ElementRtpAC3DePay>(pay_id);
-  aac_pay->SetPt(pt);
-  return aac_pay;
+ElementRtpH264DePay* make_h264_depay(element_id_t pay_id) {
+  ElementRtpH264DePay* h264_pay = make_video_depay<ElementRtpH264DePay>(pay_id);
+  return h264_pay;
 }
 
-Element* make_audio_depay(const std::string& pay, const std::string& name) {
-  if (pay == ElementRtpAACDePay::GetPluginName()) {
-    return new ElementRtpAACDePay(name);
-  } else if (pay == ElementRtpAC3DePay::GetPluginName()) {
-    return new ElementRtpAC3DePay(name);
+ElementRtpH265DePay* make_h265_depay(element_id_t pay_id) {
+  ElementRtpH265DePay* h265_pay = make_video_depay<ElementRtpH265DePay>(pay_id);
+  return h265_pay;
+}
+
+Element* make_video_depay(const std::string& pay, const std::string& name) {
+  if (pay == ElementRtpH264DePay::GetPluginName()) {
+    return new ElementRtpH264DePay(name);
+  } else if (pay == ElementRtpH265DePay::GetPluginName()) {
+    return new ElementRtpH265DePay(name);
+  } else if (pay == ElementRtpMPEG2DePay::GetPluginName()) {
+    return new ElementRtpMPEG2DePay(name);
   }
 
   NOTREACHED();

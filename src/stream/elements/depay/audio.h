@@ -14,21 +14,41 @@
 
 #pragma once
 
-#include "stream/elements/element.h"
+#include <string>
+
+#include <common/sprintf.h>
+
+#include "stream/stypes.h"
+
+#include "stream/elements/depay/depay.h"  // for ElementRtpPay
+#include "stream/elements/element.h"      // for Element (ptr only), SupportedElements:...
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace depay {
 
-template <SupportedElements el>
-class ElementRtpDePay : public ElementEx<el> {
+class ElementRtpAACDePay : public ElementRtpDePay<ELEMENT_RTP_AAC_DEPAY> {
  public:
-  typedef ElementEx<el> base_class;
+  typedef ElementRtpDePay<ELEMENT_RTP_AAC_DEPAY> base_class;
   using base_class::base_class;
-
-  void SetPt(guint pt) { ElementEx<el>::SetProperty("pt", pt); }
 };
+
+class ElementRtpAC3DePay : public ElementRtpDePay<ELEMENT_RTP_AC3_DEPAY> {
+ public:
+  typedef ElementRtpDePay<ELEMENT_RTP_AC3_DEPAY> base_class;
+  using base_class::base_class;
+};
+
+template <typename T>
+T* make_audio_depay(element_id_t pay_id) {
+  return make_element<T>(common::MemSPrintf(AUDIO_DEPAY_NAME_1U, pay_id));
+}
+
+ElementRtpAACDePay* make_aac_depay(element_id_t pay_id);
+ElementRtpAC3DePay* make_ac3_depay(element_id_t pay_id);
+
+Element* make_audio_depay(const std::string& pay, const std::string& name);
 
 }  // namespace depay
 }  // namespace elements

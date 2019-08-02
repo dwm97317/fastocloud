@@ -18,8 +18,8 @@
 
 #include <common/sprintf.h>
 
-#include "stream/elements/parser/audio_parsers.h"
-#include "stream/elements/parser/video_parsers.h"
+#include "stream/elements/parser/audio.h"
+#include "stream/elements/parser/video.h"
 
 namespace fastocloud {
 namespace stream {

@@ -23,9 +23,9 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementV4L2Src : public ElementEx<ELEMENT_V4L2_SRC> {
+class ElementV4L2Src : public ElementPushSrc<ELEMENT_V4L2_SRC> {
  public:
-  typedef ElementEx<ELEMENT_V4L2_SRC> base_class;
+  typedef ElementPushSrc<ELEMENT_V4L2_SRC> base_class;
   using base_class::base_class;
 
   void SetDevice(const std::string& device = "/dev/video0");  // Default value: "/dev/video0"
