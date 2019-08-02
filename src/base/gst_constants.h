@@ -36,11 +36,16 @@
 #define MPEGTS_MUX "mpegtsmux"
 #define FILE_SINK "filesink"
 #define RTP_MUX "rtpmux"
-#define RTP_MPEG2_PAY "rtpmp2tpay"  //
-#define RTP_H264_PAY "rtph264pay"   //
-#define RTP_H265_PAY "rtph265pay"   //
-#define RTP_AAC_PAY "rtpmp4apay"    //
-#define RTP_AC3_PAY "rtpac3pay"     //
+#define RTP_MPEG2_PAY "rtpmp2tpay"
+#define RTP_H264_PAY "rtph264pay"
+#define RTP_H265_PAY "rtph265pay"
+#define RTP_AAC_PAY "rtpmp4apay"
+#define RTP_AC3_PAY "rtpac3pay"
+#define RTP_MPEG2_DEPAY "rtpmp2tdepay"
+#define RTP_H264_DEPAY "rtph264depay"
+#define RTP_H265_DEPAY "rtph265depay"
+#define RTP_AAC_DEPAY "rtpmp4adepay"
+#define RTP_AC3_DEPAY "rtpac3depay"
 #define V4L2_SRC "v4l2src"
 #define SPLIT_MUX_SINK "splitmuxsink"
 #define ALSA_SRC "alsasrc"

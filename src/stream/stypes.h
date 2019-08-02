@@ -82,6 +82,9 @@
 #define AUDIO_PAY_NAME_1U "audio_pay_%lu"
 #define VIDEO_PAY_NAME_1U "video_pay_%lu"
 
+#define AUDIO_DEPAY_NAME_1U "audio_depay_%lu"
+#define VIDEO_DEPAY_NAME_1U "video_depay_%lu"
+
 #define VIDEO_TEE_QUEUE_NAME_1U "video_tee_queue_%lu"
 #define AUDIO_TEE_QUEUE_NAME_1U "audio_tee_queue_%lu"
 

@@ -253,6 +253,17 @@ SET(ELEMENTS_PAY_SOURCES
   ${CMAKE_SOURCE_DIR}/src/stream/elements/pay/audio_pay.cpp
 )
 
+SET(ELEMENTS_DEPAY_HEADERS
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/pay.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/video_pay.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/audio_pay.h
+)
+SET(ELEMENTS_DEPAY_SOURCES
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/pay.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/video_pay.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/depay/audio_pay.cpp
+)
+
 IF(MACHINE_LEARNING AND FASTOML_FOUND)
   SET(ELEMENTS_DEEP_LEARNING_HEADERS
     ${CMAKE_SOURCE_DIR}/src/stream/elements/machine_learning/video_ml_filter.h
@@ -281,6 +292,7 @@ SET(ELEMENTS_HEADERS
   ${ELEMENTS_DEEP_LEARNING_HEADERS}
   ${ELEMENTS_MUXER_HEADERS}
   ${ELEMENTS_PAY_HEADERS}
+  ${ELEMENTS_DEPAY_HEADERS}
   ${ELEMENTS_PARSER_HEADERS}
   ${ELEMENTS_ENCODERS_HEADERS}
   ${ELEMENTS_SINKS_HEADERS}
@@ -292,6 +304,7 @@ SET(ELEMENTS_SOURCES
   ${ELEMENTS_DEEP_LEARNING_SOURCES}
   ${ELEMENTS_MUXER_SOURCES}
   ${ELEMENTS_PAY_SOURCES}
+  ${ELEMENTS_DEPAY_SOURCES}
   ${ELEMENTS_PARSER_SOURCES}
   ${ELEMENTS_ENCODERS_SOURCES}
   ${ELEMENTS_SINKS_SOURCES}
