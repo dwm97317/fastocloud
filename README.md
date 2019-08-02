@@ -20,8 +20,8 @@ About IPTV/Video cloud
 * Protocol gzip compression
 * Deep learning video analysis (Paid, demo by request)
 * Subscribers control
-* [IPTV Admin panel](https://github.com/fastogt/iptv_admin)
-* [Docker Image](https://hub.docker.com/r/fastogt/fastocloud)
+* IPTV Admin panel
+* Docker Image
 
 Visit our site: [fastocloud.com](https://fastocloud.com)
 
