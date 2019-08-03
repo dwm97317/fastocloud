@@ -12,29 +12,12 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#pragma once
-
-#include <string>
-
-#include "stream/elements/sources/sources.h"  // for ElementLocation
+#include "stream/elements/parser/parser.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
-namespace sources {
-
-class ElementRTSPSrc : public ElementBinEx<ELEMENT_RTSP_SRC> {
- public:
-  typedef ElementBinEx<ELEMENT_RTSP_SRC> base_class;
-  using base_class::base_class;
-
-  void SetLocation(const std::string& location);  // String; Default: null
-  void SetLatency(gint latency);
-};
-
-ElementRTSPSrc* make_rtsp_src(const std::string& location, element_id_t input_id);
-
-}  // namespace sources
+namespace parser {}  // namespace parser
 }  // namespace elements
 }  // namespace stream
 }  // namespace fastocloud

@@ -20,39 +20,39 @@
 
 #include "stream/stypes.h"
 
-#include "stream/elements/element.h"
+#include "stream/elements/parser/parser.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace parser {
 
-class ElementH264Parse : public ElementEx<ELEMENT_H264_PARSE> {
+class ElementH264Parse : public ElementBaseParse<ELEMENT_H264_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_H264_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_H264_PARSE> base_class;
   using base_class::base_class;
 
   void SetConfigInterval(gint interval = 0);  // Range: -1 - 3600 Default: 0
   void SetDisablePassthrough(gboolean pass);
 };
 
-class ElementH265Parse : public ElementEx<ELEMENT_H265_PARSE> {
+class ElementH265Parse : public ElementBaseParse<ELEMENT_H265_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_H265_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_H265_PARSE> base_class;
   using base_class::base_class;
 
   void SetConfigInterval(guint interval = 0);  // Range: 0 - 3600 Default: 0
 };
 
-class ElementMpegParse : public ElementEx<ELEMENT_MPEG_VIDEO_PARSE> {
+class ElementMpegParse : public ElementBaseParse<ELEMENT_MPEG_VIDEO_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_MPEG_VIDEO_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_MPEG_VIDEO_PARSE> base_class;
   using base_class::base_class;
 };
 
-class ElementTsParse : public ElementEx<ELEMENT_TS_PARSE> {
+class ElementTsParse : public ElementBaseParse<ELEMENT_TS_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_TS_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_TS_PARSE> base_class;
   using base_class::base_class;
 };
 

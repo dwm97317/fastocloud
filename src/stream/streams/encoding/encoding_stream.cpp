@@ -210,6 +210,8 @@ void EncodingStream::HandleDecodeBinPadAdded(GstElement* src, GstPad* new_pad) {
   if (!gst_pad_is_linked(sink_pad->GetGstPad())) {
     GstPadLinkReturn ret = gst_pad_link(new_pad, sink_pad->GetGstPad());
     if (GST_PAD_LINK_FAILED(ret)) {
+      WARNING_LOG() << "Failed to link: " << GST_ELEMENT_NAME(src) << " " << GST_PAD_NAME(new_pad) << " "
+                    << new_pad_type;
     } else {
       DEBUG_LOG() << "Pad emitted: " << GST_ELEMENT_NAME(src) << " " << GST_PAD_NAME(new_pad) << " " << new_pad_type;
     }

@@ -40,11 +40,28 @@ IBaseBuilder* RtspRelayStream::CreateBuilder() {
 void RtspRelayStream::OnRTSPSrcCreated(elements::sources::ElementRTSPSrc* src) {
   gboolean pad_added = src->RegisterPadAddedCallback(rtspsrc_pad_added_callback, this);
   DCHECK(pad_added);
+
+  gboolean pad_removed = src->RegisterPadRemovedCallback(rtspsrc_pad_removed_callback, this);
+  DCHECK(pad_removed);
+
+  gboolean no_more_pads = src->RegisterNoMorePadsCallback(rtspsrc_no_more_pads_callback, this);
+  DCHECK(no_more_pads);
 }
 
 void RtspRelayStream::rtspsrc_pad_added_callback(GstElement* src, GstPad* new_pad, gpointer user_data) {
   RtspRelayStream* stream = reinterpret_cast<RtspRelayStream*>(user_data);
+  INFO_LOG() << "rtspsrc_pad_added_callback";
   stream->HandleRtspSrcPadAdded(src, new_pad);
+}
+
+void RtspRelayStream::rtspsrc_pad_removed_callback(GstElement* self, GstPad* old_pad, gpointer user_data) {
+  RtspRelayStream* stream = reinterpret_cast<RtspRelayStream*>(user_data);
+  INFO_LOG() << "rtspsrc_pad_removed_callback";
+}
+
+void RtspRelayStream::rtspsrc_no_more_pads_callback(GstElement* self, gpointer user_data) {
+  RtspRelayStream* stream = reinterpret_cast<RtspRelayStream*>(user_data);
+  INFO_LOG() << "rtspsrc_no_more_pads_callback";
 }
 
 void RtspRelayStream::HandleRtspSrcPadAdded(GstElement* src, GstPad* new_pad) {
@@ -69,6 +86,8 @@ void RtspRelayStream::HandleRtspSrcPadAdded(GstElement* src, GstPad* new_pad) {
   if (!gst_pad_is_linked(sink_pad->GetGstPad())) {
     GstPadLinkReturn ret = gst_pad_link(new_pad, sink_pad->GetGstPad());
     if (GST_PAD_LINK_FAILED(ret)) {
+      WARNING_LOG() << "Failed to link: " << GST_ELEMENT_NAME(src) << " " << GST_PAD_NAME(new_pad) << " "
+                    << new_pad_type;
     } else {
       DEBUG_LOG() << "Pad emitted: " << GST_ELEMENT_NAME(src) << " " << GST_PAD_NAME(new_pad) << " " << new_pad_type;
     }

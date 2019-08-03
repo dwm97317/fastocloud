@@ -31,6 +31,7 @@
 #define AAC_PARSE "aacparse"
 #define AC3_PARSE "ac3parse"
 #define MPEG_AUDIO_PARSE "mpegaudioparse"
+#define RAW_AUDIO_PARSE "rawaudioparse"
 #define TEE "tee"
 #define FLV_MUX "flvmux"
 #define MPEGTS_MUX "mpegtsmux"
@@ -197,7 +198,7 @@
 #define DETECTION_OVERLAY "detectionoverlay"
 
 #define SUPPORTED_VIDEO_PARSERS_COUNT 3
-#define SUPPORTED_AUDIO_PARSERS_COUNT 3
+#define SUPPORTED_AUDIO_PARSERS_COUNT 4
 
 extern const std::array<const char*, SUPPORTED_VIDEO_PARSERS_COUNT> kSupportedVideoParsers;
 extern const std::array<const char*, SUPPORTED_AUDIO_PARSERS_COUNT> kSupportedAudioParsers;

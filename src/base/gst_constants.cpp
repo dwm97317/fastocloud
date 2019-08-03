@@ -18,7 +18,7 @@ const std::array<const char*, SUPPORTED_VIDEO_PARSERS_COUNT> kSupportedVideoPars
     {TS_PARSE, H264_PARSE, H265_PARSE}};
 
 const std::array<const char*, SUPPORTED_AUDIO_PARSERS_COUNT> kSupportedAudioParsers = {
-    {MPEG_AUDIO_PARSE, AAC_PARSE, AC3_PARSE}};
+    {MPEG_AUDIO_PARSE, AAC_PARSE, AC3_PARSE, RAW_AUDIO_PARSE}};
 
 const std::array<const char*, SUPPORTED_VIDEO_ENCODERS_COUNT> kSupportedVideoEncoders = {
     {EAVC_ENC, OPEN_H264_ENC, X264_ENC, NV_H264_ENC, VAAPI_H264_ENC, VAAPI_MPEG2_ENC, MFX_H264_ENC, X265_ENC,

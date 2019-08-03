@@ -43,6 +43,8 @@ class RtspRelayStream : public RelayStream {
 
  private:
   static void rtspsrc_pad_added_callback(GstElement* src, GstPad* new_pad, gpointer user_data);
+  static void rtspsrc_pad_removed_callback(GstElement* self, GstPad* old_pad, gpointer user_data);
+  static void rtspsrc_no_more_pads_callback(GstElement* self, gpointer user_data);
 };
 
 }  // namespace streams

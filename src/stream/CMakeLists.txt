@@ -244,10 +244,12 @@ SET(ELEMENTS_ENCODERS_SOURCES
 SET(ELEMENTS_PARSER_HEADERS
   ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/video.h
   ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/audio.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/parser.h
 )
 SET(ELEMENTS_PARSER_SOURCES
   ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/video.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/audio.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/parser/parser.cpp
 )
 
 SET(ELEMENTS_PAY_HEADERS

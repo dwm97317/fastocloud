@@ -27,6 +27,7 @@ class RelayStreamBuilder : public SrcDecodeStreamBuilder {
  public:
   RelayStreamBuilder(const RelayConfig* config, SrcDecodeBinStream* observer);
 
+  Connector BuildUdbConnections(Connector conn) override;
   elements::Element* BuildVideoUdbConnection() override;
   elements::Element* BuildAudioUdbConnection() override;
 

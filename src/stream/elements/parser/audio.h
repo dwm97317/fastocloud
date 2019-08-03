@@ -20,30 +20,37 @@
 
 #include "stream/stypes.h"
 
-#include "stream/elements/element.h"
+#include "stream/elements/parser/parser.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
 namespace parser {
 
-class ElementAACParse : public ElementEx<ELEMENT_AAC_PARSE> {
+class ElementAACParse : public ElementBaseParse<ELEMENT_AAC_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_AAC_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_AAC_PARSE> base_class;
   using base_class::base_class;
 };
 
-class ElementAC3Parse : public ElementEx<ELEMENT_AC3_PARSE> {
+class ElementAC3Parse : public ElementBaseParse<ELEMENT_AC3_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_AC3_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_AC3_PARSE> base_class;
   using base_class::base_class;
 };
 
-class ElementMPEGAudioParse : public ElementEx<ELEMENT_MPEG_AUDIO_PARSE> {
+class ElementMPEGAudioParse : public ElementBaseParse<ELEMENT_MPEG_AUDIO_PARSE> {
  public:
-  typedef ElementEx<ELEMENT_MPEG_AUDIO_PARSE> base_class;
+  typedef ElementBaseParse<ELEMENT_MPEG_AUDIO_PARSE> base_class;
   using base_class::base_class;
 };
+
+class ElementRawAudioParse : public ElementBaseParse<ELEMENT_RAW_AUDIO_PARSE> {
+ public:
+  typedef ElementBaseParse<ELEMENT_RAW_AUDIO_PARSE> base_class;
+  using base_class::base_class;
+};
+
 
 template <typename T>
 T* make_audio_parser(element_id_t parser_id) {
@@ -53,6 +60,7 @@ T* make_audio_parser(element_id_t parser_id) {
 ElementAACParse* make_aac_parser(element_id_t parser_id);
 ElementAC3Parse* make_ac3_parser(element_id_t parser_id);
 ElementMPEGAudioParse* make_mpeg_parser(element_id_t parser_id);
+ElementRawAudioParse* make_raw_parser(element_id_t parser_id);
 
 Element* make_audio_parser(const std::string& parser, const std::string& name);
 

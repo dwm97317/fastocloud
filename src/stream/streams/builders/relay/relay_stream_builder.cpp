@@ -18,6 +18,7 @@
 
 #include <common/sprintf.h>
 
+#include "stream/elements/encoders/audio.h"
 #include "stream/elements/parser/audio.h"
 #include "stream/elements/parser/video.h"
 
@@ -47,6 +48,32 @@ elements::Element* RelayStreamBuilder::BuildAudioUdbConnection() {
   elements::Element* audio =
       elements::parser::make_audio_parser(audio_parser, common::MemSPrintf(UDB_AUDIO_NAME_1U, 0));
   return audio;
+}
+
+Connector RelayStreamBuilder::BuildUdbConnections(Connector conn) {
+  CHECK(conn.video == nullptr) << "Must be video empty channel.";
+  CHECK(conn.audio == nullptr) << "Must be audio empty channel.";
+  const RelayConfig* rconfig = static_cast<const RelayConfig*>(GetConfig());
+  if (rconfig->HaveVideo()) {
+    elements::Element* vudb = BuildVideoUdbConnection();
+    CHECK(vudb);
+    ElementAdd(vudb);
+    conn.video = vudb;
+  }
+  if (rconfig->HaveAudio()) {
+    elements::Element* audb = BuildAudioUdbConnection();
+    CHECK(audb);
+    ElementAdd(audb);
+    std::string audio_parser = rconfig->GetAudioParser();
+    if (audio_parser == elements::parser::ElementRawAudioParse::GetPluginName()) {
+      elements::encoders::ElementFAAC* faac = elements::encoders::make_aac_encoder(0);
+      ElementAdd(faac);
+      ElementLink(audb, faac);
+      audb = faac;
+    }
+    conn.audio = audb;
+  }
+  return conn;
 }
 
 SupportedVideoCodec RelayStreamBuilder::GetVideoCodecType() const {

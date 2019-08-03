@@ -14,27 +14,21 @@
 
 #pragma once
 
-#include <string>
-
-#include "stream/elements/sources/sources.h"  // for ElementLocation
+#include "stream/elements/element.h"
 
 namespace fastocloud {
 namespace stream {
 namespace elements {
-namespace sources {
+namespace parser {
 
-class ElementRTSPSrc : public ElementBinEx<ELEMENT_RTSP_SRC> {
+template <SupportedElements el>
+class ElementBaseParse : public ElementEx<el> {
  public:
-  typedef ElementBinEx<ELEMENT_RTSP_SRC> base_class;
+  typedef ElementEx<el> base_class;
   using base_class::base_class;
-
-  void SetLocation(const std::string& location);  // String; Default: null
-  void SetLatency(gint latency);
 };
 
-ElementRTSPSrc* make_rtsp_src(const std::string& location, element_id_t input_id);
-
-}  // namespace sources
+}  // namespace parser
 }  // namespace elements
 }  // namespace stream
 }  // namespace fastocloud

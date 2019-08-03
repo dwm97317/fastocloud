@@ -47,6 +47,7 @@ enum SupportedElements {
   ELEMENT_AAC_PARSE,
   ELEMENT_AC3_PARSE,
   ELEMENT_MPEG_AUDIO_PARSE,
+  ELEMENT_RAW_AUDIO_PARSE,
   ELEMENT_TEE,
   ELEMENT_FLV_MUX,
   ELEMENT_MPEGTS_MUX,
@@ -143,6 +144,10 @@ struct ElementsTraits {
 // wrapper for GstElement
 class Element {
  public:
+  typedef void (*pad_added_callback_t)(GstElement* self, GstPad* new_pad, gpointer user_data);
+  typedef void (*pad_removed_callback_t)(GstElement* self, GstPad* old_pad, gpointer user_data);
+  typedef void (*no_more_pads_callback_t)(GstElement* self, gpointer user_data);
+
   std::string GetPluginName() const;  // gst plugin name
   std::string GetName() const;
   bool IsValid() const;
@@ -174,6 +179,10 @@ class Element {
 
   static std::string GetElementName(GstElement* element);
   static std::string GetPluginName(GstElement* element);
+
+  gboolean RegisterPadAddedCallback(pad_added_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
+  gboolean RegisterPadRemovedCallback(pad_removed_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
+  gboolean RegisterNoMorePadsCallback(no_more_pads_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
 
  protected:
   Element(const std::string& plugin_name,
@@ -248,7 +257,6 @@ class ElementDecodebin : public ElementBinEx<ELEMENT_DECODEBIN> {
   typedef ElementBinEx<ELEMENT_DECODEBIN> base_class;
   using base_class::base_class;
 
-  typedef void (*pad_added_callback_t)(GstElement* src, GstPad* new_pad, gpointer user_data);
   typedef gboolean (*autoplug_continue_callback_t)(GstElement* elem, GstPad* pad, GstCaps* caps, gpointer user_data);
 
   typedef GValueArray* (*autoplug_sort_callback_t)(GstElement* bin,
@@ -264,7 +272,6 @@ class ElementDecodebin : public ElementBinEx<ELEMENT_DECODEBIN> {
 
   void SetUseBuffering(bool use_buffering = false);  // Default: false
 
-  gboolean RegisterPadAddedCallback(pad_added_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
   gboolean RegisterAutoplugContinue(autoplug_continue_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
   gboolean RegisterAutoplugSelect(autoplug_select_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
   gboolean RegisterAutoplugSort(autoplug_sort_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;

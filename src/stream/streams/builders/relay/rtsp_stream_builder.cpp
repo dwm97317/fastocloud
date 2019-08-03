@@ -36,17 +36,26 @@ RtspRelayStreamBuilder::RtspRelayStreamBuilder(const RelayConfig* api, SrcDecode
     : RelayStreamBuilder(api, observer) {}
 
 Connector RtspRelayStreamBuilder::BuildInput() {
-  const Config* config = GetConfig();
+  const RelayConfig* config = static_cast<const RelayConfig*>(GetConfig());
   input_t prepared = config->GetInput();
   InputUri uri = prepared[0];
   const common::uri::Url url = uri.GetInput();
   elements::sources::ElementRTSPSrc* src = elements::sources::make_rtsp_src(url.GetUrl(), 0);
+  src->SetLatency(0);
   ElementAdd(src);
   HandleRTSPSrcCreated(src);
 
-  elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 0));
-  ElementAdd(decodebin);
-  HandleDecodebinCreated(decodebin);
+  if (config->HaveVideo()) {
+    elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 0));
+    ElementAdd(decodebin);
+    HandleDecodebinCreated(decodebin);
+  }
+
+  if (config->HaveAudio()) {
+    elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 1));
+    ElementAdd(decodebin);
+    HandleDecodebinCreated(decodebin);
+  }
   return {nullptr, nullptr};
 }
 

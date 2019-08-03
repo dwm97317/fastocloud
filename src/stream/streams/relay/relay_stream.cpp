@@ -151,6 +151,8 @@ void RelayStream::HandleDecodeBinPadAdded(GstElement* src, GstPad* new_pad) {
   if (!gst_pad_is_linked(sink_pad->GetGstPad())) {
     GstPadLinkReturn ret = gst_pad_link(new_pad, sink_pad->GetGstPad());
     if (GST_PAD_LINK_FAILED(ret)) {
+      WARNING_LOG() << "Failed to link: " << GST_ELEMENT_NAME(src) << " " << GST_PAD_NAME(new_pad) << " "
+                    << new_pad_type;
     } else {
       DEBUG_LOG() << "Pad emitted: " << GST_ELEMENT_NAME(src) << " " << GST_PAD_NAME(new_pad) << " " << new_pad_type;
     }
@@ -189,16 +191,16 @@ GstAutoplugSelectResult RelayStream::HandleAutoplugSelect(GstElement* bin,
 
   const RelayConfig* config = static_cast<const RelayConfig*>(GetConfig());
   gpointer plug_feature = GST_PLUGIN_FEATURE(factory);
-  const gchar* factoryName = gst_plugin_feature_get_name(plug_feature);
+  const gchar* factory_name = gst_plugin_feature_get_name(plug_feature);
   bool is_need_to_patch = config->IsAvFormat();
   if (!is_need_to_patch) {
     return GST_AUTOPLUG_SELECT_TRY;
   }
 
   SupportedDemuxer dem;
-  if (elements::ElementTsDemux::GetPluginName() == factoryName && IsDemuxerFromType(type_title, &dem) &&
+  if (elements::ElementTsDemux::GetPluginName() == factory_name && IsDemuxerFromType(type_title, &dem) &&
       dem == VIDEO_MPEGTS_DEMUXER) {
-    INFO_LOG() << "skip: " << factoryName;
+    INFO_LOG() << "skip: " << factory_name;
     return GST_AUTOPLUG_SELECT_SKIP;
   }
 

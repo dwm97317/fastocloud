@@ -35,6 +35,10 @@ ElementAC3Parse* make_ac3_parser(element_id_t parser_id) {
   return make_audio_parser<ElementAC3Parse>(parser_id);
 }
 
+ElementRawAudioParse* make_raw_parser(element_id_t parser_id) {
+  return make_audio_parser<ElementRawAudioParse>(parser_id);
+}
+
 Element* make_audio_parser(const std::string& parser, const std::string& name) {
   if (parser == ElementAACParse::GetPluginName()) {
     return new ElementAACParse(name);
@@ -42,6 +46,8 @@ Element* make_audio_parser(const std::string& parser, const std::string& name) {
     return new ElementAC3Parse(name);
   } else if (parser == ElementMPEGAudioParse::GetPluginName()) {
     return new ElementMPEGAudioParse(name);
+  } else if (parser == ElementRawAudioParse::GetPluginName()) {
+    return new ElementRawAudioParse(name);
   }
 
   NOTREACHED() << "Please register new audio parser type: " << parser;

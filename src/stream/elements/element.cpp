@@ -105,6 +105,18 @@ gboolean Element::RegisterCallback(const char* signal_name, GCallback cb, gpoint
   return TRUE;
 }
 
+gboolean Element::RegisterPadAddedCallback(pad_added_callback_t cb, gpointer user_data) {
+  return RegisterCallback("pad-added", G_CALLBACK(cb), user_data);
+}
+
+gboolean Element::RegisterPadRemovedCallback(pad_removed_callback_t cb, gpointer user_data) {
+  return RegisterCallback("pad-removed", G_CALLBACK(cb), user_data);
+}
+
+gboolean Element::RegisterNoMorePadsCallback(no_more_pads_callback_t cb, gpointer user_data) {
+  return RegisterCallback("no-more-pads", G_CALLBACK(cb), user_data);
+}
+
 void Element::UnRegisterCallback(gulong signal_id) {
   g_signal_handler_disconnect(element_, signal_id);
 }
@@ -207,10 +219,6 @@ std::string Element::GetPluginName(GstElement* element) {
 
 void ElementDecodebin::SetUseBuffering(bool use_buffering) {
   SetProperty("use-buffering", use_buffering);
-}
-
-gboolean ElementDecodebin::RegisterPadAddedCallback(pad_added_callback_t cb, gpointer user_data) {
-  return RegisterCallback("pad-added", G_CALLBACK(cb), user_data);
 }
 
 gboolean ElementDecodebin::RegisterAutoplugContinue(autoplug_continue_callback_t cb, gpointer user_data) {
@@ -348,6 +356,7 @@ DECLARE_ELEMENT_TRAITS_SPECIALIZATION(MPEG_VIDEO_PARSE)
 DECLARE_ELEMENT_TRAITS_SPECIALIZATION(AAC_PARSE)
 DECLARE_ELEMENT_TRAITS_SPECIALIZATION(AC3_PARSE)
 DECLARE_ELEMENT_TRAITS_SPECIALIZATION(MPEG_AUDIO_PARSE)
+DECLARE_ELEMENT_TRAITS_SPECIALIZATION(RAW_AUDIO_PARSE)
 DECLARE_ELEMENT_TRAITS_SPECIALIZATION(TEE)
 DECLARE_ELEMENT_TRAITS_SPECIALIZATION(FLV_MUX)
 DECLARE_ELEMENT_TRAITS_SPECIALIZATION(MPEGTS_MUX)
