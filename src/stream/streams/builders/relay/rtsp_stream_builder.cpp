@@ -35,7 +35,7 @@ namespace builders {
 RtspRelayStreamBuilder::RtspRelayStreamBuilder(const RelayConfig* api, SrcDecodeBinStream* observer)
     : RelayStreamBuilder(api, observer) {}
 
-elements::Element* RtspRelayStreamBuilder::BuildInputSrc() {
+Connector RtspRelayStreamBuilder::BuildInput() {
   const Config* config = GetConfig();
   input_t prepared = config->GetInput();
   InputUri uri = prepared[0];
@@ -44,15 +44,9 @@ elements::Element* RtspRelayStreamBuilder::BuildInputSrc() {
   ElementAdd(src);
   HandleRTSPSrcCreated(src);
 
-  return src;
-}
-
-Connector RtspRelayStreamBuilder::BuildInput() {
-  elements::Element* src = BuildInputSrc();
   elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 0));
   ElementAdd(decodebin);
   HandleDecodebinCreated(decodebin);
-
   return {nullptr, nullptr};
 }
 

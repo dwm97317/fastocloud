@@ -29,7 +29,6 @@ namespace builders {
 class RtspRelayStreamBuilder : public RelayStreamBuilder {
  public:
   RtspRelayStreamBuilder(const RelayConfig* api, SrcDecodeBinStream* observer);
-  elements::Element* BuildInputSrc() override;
   Connector BuildInput() override;
 
  protected:

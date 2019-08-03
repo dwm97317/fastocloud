@@ -23,6 +23,7 @@
 #define APPLICATION_ICY "application/x-icy"
 #define APPLICATION_TELETEXT "application/x-teletext"
 #define APPLICATION_GZIP "application/x-gzip"
+#define APPLICATION_XRTP "application/x-rtp"
 
 #define IMAGE_PNG "image/png"
 #define IMAGE_JPEG "image/jpeg"
@@ -128,6 +129,9 @@ bool IsOtherFromType(const std::string& type, SupportedOtherType* oc) {
     return true;
   } else if (type == APPLICATION_GZIP) {
     *oc = APPLICATION_GZIP_TYPE;
+    return true;
+  } else if (type == APPLICATION_XRTP) {
+    *oc = APPLICATION_XRTP_TYPE;
     return true;
   } else if (type == IMAGE_PNG) {
     *oc = IMAGE_PNG_TYPE;

@@ -25,6 +25,8 @@
 #include "stream/elements/element.h"  // for Element
 #include "stream/elements/sources/rtspsrc.h"
 
+#include "stream/streams/encoding/rtsp_encoding_stream.h"
+
 namespace fastocloud {
 namespace stream {
 namespace streams {
@@ -33,41 +35,26 @@ namespace builders {
 RtspEncodingStreamBuilder::RtspEncodingStreamBuilder(const EncodeConfig* api, SrcDecodeBinStream* observer)
     : EncodingStreamBuilder(api, observer) {}
 
-elements::Element* RtspEncodingStreamBuilder::BuildInputSrc() {
+Connector RtspEncodingStreamBuilder::BuildInput() {
   const Config* config = GetConfig();
   input_t prepared = config->GetInput();
   InputUri uri = prepared[0];
   const common::uri::Url url = uri.GetInput();
-  elements::Element* src = elements::sources::make_rtsp_src(url.GetUrl(), 0);
-  pad::Pad* src_pad = src->StaticPad("src");
-  if (src_pad->IsValid()) {
-    HandleInputSrcPadCreated(url.GetScheme(), src_pad, 0);
-  }
-  delete src_pad;
+  elements::sources::ElementRTSPSrc* src = elements::sources::make_rtsp_src(url.GetUrl(), 0);
   ElementAdd(src);
-  return src;
+  HandleRTSPSrcCreated(src);
+
+  elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 0));
+  ElementAdd(decodebin);
+  HandleDecodebinCreated(decodebin);
+  return {nullptr, nullptr};
 }
 
-Connector RtspEncodingStreamBuilder::BuildInput() {
-  const EncodeConfig* config = static_cast<const EncodeConfig*>(GetConfig());
-  elements::Element* video = nullptr;
-  if (config->HaveVideo()) {
-    elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 0));
-    ElementAdd(decodebin);
-    ElementLink(video, decodebin);
-    HandleDecodebinCreated(decodebin);
-    video = decodebin;
+void RtspEncodingStreamBuilder::HandleRTSPSrcCreated(elements::sources::ElementRTSPSrc* src) {
+  RtspEncodingStream* stream = static_cast<RtspEncodingStream*>(GetObserver());
+  if (stream) {
+    stream->OnRTSPSrcCreated(src);
   }
-
-  elements::Element* audio = nullptr;
-  if (config->HaveAudio()) {
-    elements::ElementDecodebin* decodebin = new elements::ElementDecodebin(common::MemSPrintf(DECODEBIN_NAME_1U, 1));
-    ElementAdd(decodebin);
-    ElementLink(audio, decodebin);
-    HandleDecodebinCreated(decodebin);
-    audio = decodebin;
-  }
-  return {nullptr, nullptr};
 }
 
 }  // namespace builders

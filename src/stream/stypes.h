@@ -122,6 +122,7 @@ enum SupportedOtherType {
   APPLICATION_ICY_TYPE,       // "application/x-icy"
   APPLICATION_TELETEXT_TYPE,  // "application/x-teletext"
   APPLICATION_GZIP_TYPE,      // "application/x-gzip"
+  APPLICATION_XRTP_TYPE,      // "application/x-rtp"
   SUBPICTURE_DVB_TYPE,        // "subpicture/x-dvb"
   IMAGE_PNG_TYPE,             // "image/png"
   IMAGE_JPEG_TYPE             // "image/jpeg"

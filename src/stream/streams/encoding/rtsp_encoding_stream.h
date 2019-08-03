@@ -18,15 +18,32 @@
 
 namespace fastocloud {
 namespace stream {
+namespace elements {
+namespace sources {
+class ElementRTSPSrc;
+}
+}  // namespace elements
 namespace streams {
 
+namespace builders {
+class RtspEncodingStreamBuilder;
+}
+
 class RtspEncodingStream : public EncodingStream {
+  friend class builders::RtspEncodingStreamBuilder;
+
  public:
   RtspEncodingStream(const EncodeConfig* config, IStreamClient* client, StreamStruct* stats);
   const char* ClassName() const override;
 
  protected:
   IBaseBuilder* CreateBuilder() override;
+
+  virtual void OnRTSPSrcCreated(elements::sources::ElementRTSPSrc* src);
+  virtual void HandleRtspSrcPadAdded(GstElement* src, GstPad* new_pad);
+
+ private:
+  static void rtspsrc_pad_added_callback(GstElement* src, GstPad* new_pad, gpointer user_data);
 };
 
 }  // namespace streams

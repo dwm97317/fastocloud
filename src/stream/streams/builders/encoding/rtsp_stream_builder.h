@@ -18,14 +18,21 @@
 
 namespace fastocloud {
 namespace stream {
+namespace elements {
+namespace sources {
+class ElementRTSPSrc;
+}
+}  // namespace elements
 namespace streams {
 namespace builders {
 
 class RtspEncodingStreamBuilder : public EncodingStreamBuilder {
  public:
   RtspEncodingStreamBuilder(const EncodeConfig* api, SrcDecodeBinStream* observer);
-  virtual elements::Element* BuildInputSrc();
   Connector BuildInput() override;
+
+ protected:
+  void HandleRTSPSrcCreated(elements::sources::ElementRTSPSrc* src);
 };
 
 }  // namespace builders
