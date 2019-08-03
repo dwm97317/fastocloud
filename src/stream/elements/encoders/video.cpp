@@ -12,7 +12,7 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stream/elements/encoders/video_encoders.h"
+#include "stream/elements/encoders/video.h"
 
 #include <string.h>
 #include <string>  // for string

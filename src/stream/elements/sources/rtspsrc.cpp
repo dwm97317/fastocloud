@@ -21,6 +21,14 @@ namespace stream {
 namespace elements {
 namespace sources {
 
+void ElementRTSPSrc::SetLocation(const std::string& location) {
+  SetProperty("location", location);
+}
+
+gboolean ElementRTSPSrc::RegisterPadAddedCallback(pad_added_callback_t cb, gpointer user_data) {
+  return RegisterCallback("pad-added", G_CALLBACK(cb), user_data);
+}
+
 ElementRTSPSrc* make_rtsp_src(const std::string& location, element_id_t input_id) {
   ElementRTSPSrc* rtsp_src = make_sources<ElementRTSPSrc>(input_id);
   rtsp_src->SetLocation(location);

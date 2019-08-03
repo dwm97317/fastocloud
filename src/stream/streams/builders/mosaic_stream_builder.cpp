@@ -23,8 +23,8 @@
 #include "base/gst_constants.h"
 
 #include "stream/elements/audio/audio.h"
-#include "stream/elements/encoders/audio_encoders.h"
-#include "stream/elements/encoders/video_encoders.h"
+#include "stream/elements/encoders/audio.h"
+#include "stream/elements/encoders/video.h"
 #include "stream/elements/muxer/muxer.h"
 #include "stream/elements/parser/audio.h"
 #include "stream/elements/parser/video.h"

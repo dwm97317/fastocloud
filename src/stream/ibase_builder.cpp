@@ -58,6 +58,16 @@ bool IBaseBuilder::ElementAdd(elements::Element* elem) {
 }
 
 bool IBaseBuilder::ElementLink(elements::Element* src, elements::Element* dest) {
+  if (!src || !dest) {
+    NOTREACHED();
+    return false;
+  }
+
+  if (!src->GetGstElement() || !dest->GetGstElement()) {
+    NOTREACHED();
+    return false;
+  }
+
   bool res = gst_element_link(src->GetGstElement(), dest->GetGstElement());
   CHECK(res) << "Can't linked " << src->GetPluginName() << " to " << dest->GetPluginName();
   return res;

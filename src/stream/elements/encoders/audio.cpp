@@ -12,7 +12,7 @@
     along with fastocloud.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "stream/elements/encoders/audio_encoders.h"
+#include "stream/elements/encoders/audio.h"
 
 #include <string>  // for string
 #include <vector>

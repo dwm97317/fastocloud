@@ -64,6 +64,7 @@ SET(STREAM_BUILDERS_HEADERS
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/src_decodebin_stream_builder.h
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/relay/relay_stream_builder.h
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/relay/rtsp_stream_builder.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/relay/playlist_relay_stream_builder.h
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/encoding_stream_builder.h
@@ -71,6 +72,7 @@ SET(STREAM_BUILDERS_HEADERS
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/encoding_only_video_stream_builder.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/playlist_encoding_stream_builder.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/device_stream_builder.h
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/rtsp_stream_builder.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/fake_stream_builder.h
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/timeshift/catchup_stream_builder.h
@@ -90,6 +92,7 @@ SET(STREAM_BUILDERS_SOURCES
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/src_decodebin_stream_builder.cpp
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/relay/relay_stream_builder.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/relay/rtsp_stream_builder.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/relay/playlist_relay_stream_builder.cpp
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/encoding_stream_builder.cpp
@@ -97,6 +100,7 @@ SET(STREAM_BUILDERS_SOURCES
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/encoding_only_video_stream_builder.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/playlist_encoding_stream_builder.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/device_stream_builder.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/rtsp_stream_builder.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/encoding/fake_stream_builder.cpp
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/builders/timeshift/catchup_stream_builder.cpp
@@ -117,6 +121,7 @@ SET(STREAMS_HEADERS
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/vod/vod_relay_stream.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/relay/relay_stream.h
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/relay/rtsp_relay_stream.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/relay/playlist_relay_stream.h
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/vod/vod_encoding_stream.h
@@ -125,6 +130,7 @@ SET(STREAMS_HEADERS
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/encoding_only_video_stream.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/playlist_encoding_stream.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/device_stream.h
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/rtsp_encoding_stream.h
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/fake_stream.h
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/timeshift/catchup_stream.h
@@ -148,6 +154,7 @@ SET(STREAMS_SOURCES
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/vod/vod_relay_stream.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/relay/relay_stream.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/relay/rtsp_relay_stream.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/relay/playlist_relay_stream.cpp
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/vod/vod_encoding_stream.cpp
@@ -156,6 +163,7 @@ SET(STREAMS_SOURCES
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/encoding_only_video_stream.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/playlist_encoding_stream.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/device_stream.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/rtsp_encoding_stream.cpp
   ${CMAKE_SOURCE_DIR}/src/stream/streams/encoding/fake_stream.cpp
 
   ${CMAKE_SOURCE_DIR}/src/stream/streams/timeshift/catchup_stream.cpp
@@ -225,12 +233,12 @@ SET(ELEMENTS_SINKS_SOURCES
 )
 
 SET(ELEMENTS_ENCODERS_HEADERS
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/audio_encoders.h
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/video_encoders.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/audio.h
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/video.h
 )
 SET(ELEMENTS_ENCODERS_SOURCES
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/audio_encoders.cpp
-  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/video_encoders.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/audio.cpp
+  ${CMAKE_SOURCE_DIR}/src/stream/elements/encoders/video.cpp
 )
 
 SET(ELEMENTS_PARSER_HEADERS

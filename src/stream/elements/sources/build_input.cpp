@@ -19,7 +19,6 @@
 #include "stream/elements/sources/filesrc.h"
 #include "stream/elements/sources/httpsrc.h"
 #include "stream/elements/sources/rtmpsrc.h"
-#include "stream/elements/sources/rtspsrc.h"
 #include "stream/elements/sources/tcpsrc.h"
 #include "stream/elements/sources/udpsrc.h"
 
@@ -62,8 +61,6 @@ Element* make_src(const InputUri& uri, element_id_t input_id, gint timeout_secs)
     return make_udp_src(host, input_id);
   } else if (scheme == common::uri::Url::rtmp) {
     return make_rtmp_src(url.GetUrl(), timeout_secs, input_id);
-  } else if (scheme == common::uri::Url::rtsp) {
-    return make_rtsp_src(url.GetUrl(), input_id);
   } else if (scheme == common::uri::Url::tcp) {
     // tcp://localhost:8080
     std::string host_str = url.GetHost();

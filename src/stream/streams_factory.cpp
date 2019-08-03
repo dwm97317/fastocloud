@@ -23,8 +23,10 @@
 #include "stream/streams/encoding/encoding_only_audio_stream.h"
 #include "stream/streams/encoding/encoding_only_video_stream.h"
 #include "stream/streams/encoding/playlist_encoding_stream.h"
+#include "stream/streams/encoding/rtsp_encoding_stream.h"
 #include "stream/streams/mosaic_stream.h"
 #include "stream/streams/relay/playlist_relay_stream.h"
+#include "stream/streams/relay/rtsp_relay_stream.h"
 #include "stream/streams/test/test_life_stream.h"
 #include "stream/streams/test/test_stream.h"
 #include "stream/streams/timeshift/catchup_stream.h"
@@ -66,6 +68,11 @@ IBaseStream* StreamsFactory::CreateStream(const Config* config,
       // return new streams::MosaicStream(rconfig, client, stats);
     }
 
+    InputUri iuri = input[0];
+    if (iuri.GetInput().GetScheme() == common::uri::Url::rtsp) {
+      return new streams::RtspRelayStream(rconfig, client, stats);
+    }
+
     return new streams::RelayStream(rconfig, client, stats);
   } else if (type == ENCODE || type == COD_ENCODE) {
     const streams::EncodeConfig* econfig = static_cast<const streams::EncodeConfig*>(config);
@@ -89,6 +96,8 @@ IBaseStream* StreamsFactory::CreateStream(const Config* config,
 
     if (iuri.GetInput().GetScheme() == common::uri::Url::dev) {
       return new streams::DeviceStream(econfig, client, stats);
+    } else if (iuri.GetInput().GetScheme() == common::uri::Url::rtsp) {
+      return new streams::RtspEncodingStream(econfig, client, stats);
     }
 
     if (econfig->GetRelayVideo()) {

@@ -23,10 +23,15 @@ namespace stream {
 namespace elements {
 namespace sources {
 
-class ElementRTSPSrc : public ElementLocation<ELEMENT_RTSP_SRC> {
+class ElementRTSPSrc : public ElementBinEx<ELEMENT_RTSP_SRC> {
  public:
-  typedef ElementLocation<ELEMENT_RTSP_SRC> base_class;
+  typedef ElementBinEx<ELEMENT_RTSP_SRC> base_class;
   using base_class::base_class;
+  typedef void (*pad_added_callback_t)(GstElement* src, GstPad* new_pad, gpointer user_data);
+
+  void SetLocation(const std::string& location);  // String; Default: null
+
+  gboolean RegisterPadAddedCallback(pad_added_callback_t cb, gpointer user_data) WARN_UNUSED_RESULT;
 };
 
 ElementRTSPSrc* make_rtsp_src(const std::string& location, element_id_t input_id);

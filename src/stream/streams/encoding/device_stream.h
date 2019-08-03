@@ -20,7 +20,7 @@ namespace fastocloud {
 namespace stream {
 namespace streams {
 
-class DeviceStream : public EncodingStream {  // only videotestsrc and audiotestsrc
+class DeviceStream : public EncodingStream {
  public:
   DeviceStream(const EncodeConfig* config, IStreamClient* client, StreamStruct* stats);
   const char* ClassName() const override;
